@@ -1,0 +1,33 @@
+Cada personagem vai ser associado a um artista diferente a cada dia da semana, 
+começando pela segunda-feira e repetindo o ciclo até que todos os personagens 
+tenham sido atribuídos a todos os artistas antes de começar novamente.
+
+Para atender a essa necessidade, ajustei a lógica para que cada dia da semana 
+(começando pela segunda-feira) tenha todos os personagens, cada um associado a um artista diferente. 
+Algumas regras precisam ser seguidas.
+REGRAS:
+01 = A personagem 'Posuida' deve ser sempre uma Mulher
+02 = Nao pode faltar nenhum personagem no show
+03 = A cada 5 dias, dois artistas tiram uma folga **nao foi implementado ainda***
+
+
+-----------------------//
+Numero de persoangens e o elenco total:
+personagens: 8
+artistas: 10
+---------------------------------///
+
+
+Utilizamos itertools.cycle para criar iteradores cíclicos tanto para os personagens quanto para os artistas masculinos e femininos.
+(Isso significa que ele permite iterar indefinidamente sobre uma sequência, repetindo seus elementos continuamente.)
+Exemplo: 
+Se você tem uma lista [1, 2, 3] e cria um iterador cíclico com itertools.cycle([1, 2, 3])
+ele vai retornar os elementos 1, 2, 3, 1, 2, 3, ...
+No contexto do código, é usado para garantir que possamos associar cada personagem a um artista 
+de forma contínua e cíclica. Isso é importante para distribuir os personagens e artistas ao longo dos dias da semana de acordo com
+as regras estabelecidas.
+"CÍCLICO" refere-se a algo que se repete em um padrão contínuo ou repetitivo
+
+
+
+

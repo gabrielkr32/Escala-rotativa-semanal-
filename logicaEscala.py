@@ -1,44 +1,51 @@
 import itertools
-#Importação garenta que quando chegarmos ao final da lista de personagens ela começara novamente
+
+class Personagem:
+        def __init__(self, nome, genero):
+                self.nome = nome
+                self.genero = genero
 
 
-   #teste inicial:
-   #Dias_semana: é uma lsita de dias da semana para atribuir os personagens
-   #Personagens: lista para atribuir aos 'Dias_semana'
+class Escala:
+        def __init__(self, personagens):
+                self.personagens = personagens
+                self.escala_semanal = {}
+
 
 def gerar_escala(dias_semana, personagens, artistas_Masc, artistas_Fem):
-        iter_personagens = itertools.cycle(personagens) #usando itertools.cycle para atribuir periodicamente personahens aos dias
-        
+        iter_personagens = itertools.cycle(personagens) 
+        iter_artistas_Masc = itertools.cycle(artistas_Masc)
+        iter_artistas_Fem = itertools.cycle(artistas_Fem)
+
         escala_semanal = {}
         for dia in dias_semana:
-                #'refaz' sobre cada dia, para obter o proximo personagem 
-                personagem = next(iter_personagens)
+                escala_dia = {}
                 
-                if personagem == "Possuida":
-                        artista = next(iter(artistas_Fem))
-                else:
-                        artista = next(iter(artistas_Masc))        
+                for personagem in personagens:
+                        if personagem == "Possuida":
+                                artista = next(iter_artistas_Fem)
+                        else:
+                            artista = next(iter_artistas_Masc)        
+                            
+                        escala_dia[personagem] = artista
 
-                escala_semanal[dia] = (personagem, artista)
+                escala_semanal[dia] = escala_dia
 
-        return escala_semanal
+        return escala_semanal        
 
 def main():
-        #Executa o teste, chama 'gerar-escala' com os dias da semana e personagens fornecidos
         dias_semana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"]
         personagens = ["Mordomo","Mestre", "Dracula", "Prisioneiro", "Necroterio", "Possuida", "Cemiterio", "Trevas"]
-                          #adicionei os nomes dos personagens para organização na escala em teste mais proximo do real
-        #criando uma lista dos artista separados por genero
+                          
         artistas_Masc = ["Darlei", "Jhony", "Paulo", "Gabriel", "Matheus", "Douglas", "Kevin"]
         artistas_Fam = ["Monica", "Janine", "Barbara"]
-        #uma regra a ser seguida é: um personagem feminino com um artista feminino.
-        
         
         escala = gerar_escala(dias_semana, personagens, artistas_Masc, artistas_Fam)
         
-        #mostrando a escala gerada
-        for dia, (personagem, artista) in escala.items():
-                print(f'{dia}: {personagem} - {artista}')
+        for dia, escala_dia in escala.items():
+           print(f'{dia}:')
+           for personagem, artista in escala_dia.items():
+               print(f'    {personagem} - {artista}')
 
 
 if __name__ == '__main__':
